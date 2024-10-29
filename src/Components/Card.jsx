@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 
 function Card() {
   return (
@@ -13,11 +14,7 @@ function Card() {
           className="w-full rounded-md border border-gray-300 p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400"
         />
       </div>
-      <div className="mt-6 flex justify-center">
-        <button className="bg-indigo-600 text-white border border-indigo-800 py-2 px-6 rounded-md hover:bg-indigo-700 transition duration-300">
-          Submit
-        </button>
-      </div>
+      <Button label="Submit" />
     </div>
   );
 }
