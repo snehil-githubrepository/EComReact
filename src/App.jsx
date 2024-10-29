@@ -1,9 +1,13 @@
 import "./App.css";
-import Login from "./Components/Login";
-import Signup from "./Components/Signup";
+import AppRoutes from "./Routes";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
-  return <Signup />;
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
 
 export default App;
