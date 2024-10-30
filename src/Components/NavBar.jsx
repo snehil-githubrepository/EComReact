@@ -1,6 +1,7 @@
 import React from "react";
-import Button from "./Button";
+import Button from "./Common/Button";
 import { useNavigate } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function NavBar() {
         EComReact
       </div>
       <div className="flex gap-4">
+        <FaShoppingCart className="text-4xl flex items-center justify-center mr-2 mt-1" />
         <Button label="Login" onClick={() => navigate("/login")} />
         <Button label="Register" onClick={() => navigate("/signup")} />
       </div>

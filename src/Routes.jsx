@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
-import Landing from "./Components/Landing";
+import Landing from "./Components/Landing/Landing";
 import { Routes, Route } from "react-router-dom";
 
 function AppRoutes() {
