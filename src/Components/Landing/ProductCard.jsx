@@ -1,4 +1,3 @@
-// ProductCard.js
 import React from "react";
 
 function ProductCard({ product }) {
@@ -11,8 +10,28 @@ function ProductCard({ product }) {
       />
       <div className="p-4">
         <h2 className="text-xl font-semibold">{product.name}</h2>
-        <p className="text-lg text-gray-700">{product.price}</p>
+        {/* Display old price and new price if there's a discount */}
+        <div className="text-lg text-gray-700 mb-2">
+          {product.oldPrice && (
+            <span className="line-through text-gray-500 mr-2">
+              {product.oldPrice}
+            </span>
+          )}
+          <span className="text-green-500 font-semibold">
+            {product.price}
+          </span>
+        </div>
         <p className="text-gray-600 mb-2">{product.description}</p>
+
+        {/* Display stock message based on the stock count */}
+        {product.stock === 0 ? (
+          <p className="text-red-500 font-bold">Out of Stock</p>
+        ) : product.stock <= 10 ? (
+          <p className="text-orange-500 font-bold">Only a Few Left!</p>
+        ) : (
+          <p className="text-green-600 font-bold">In Stock</p>
+        )}
+
         <div className="flex items-center mb-2">
           {/* Displaying rating */}
           {[...Array(5)].map((_, index) => (
@@ -33,9 +52,17 @@ function ProductCard({ product }) {
             ({product.rating})
           </span>
         </div>
+
         <div className="flex flex-col gap-4">
-          <button className="bg-sky-900 text-white py-2 px-4 rounded-md hover:bg-sky-800 transition duration-300">
-            Add to Cart
+        <button
+            className={`py-2 px-4 rounded-md transition duration-300 ${
+              product.stock === 0
+                ? "bg-gray-200 text-black cursor-not-allowed"
+                : "bg-sky-900 text-white hover:bg-sky-800"
+            }`}
+            disabled={product.stock === 0}
+          >
+            {product.stock === 0 ? "Unavailable" : "Add to Cart"}
           </button>
         </div>
       </div>
