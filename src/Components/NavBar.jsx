@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./Common/Button";
+import SearchBox from "./Common/SearchBox";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 
@@ -10,6 +11,9 @@ function NavBar() {
     <div className="flex justify-between items-center w-full p-4 bg-sky-900 text-white font-bold cursor-pointer">
       <div onClick={() => navigate("/")} className="cursor-pointer text-2xl">
         EComReact
+      </div>
+      <div className="w-full max-w-2xl mx-auto">
+        <SearchBox />
       </div>
       <div className="flex gap-4">
         <FaShoppingCart className="text-4xl flex items-center justify-center mr-2 mt-1" />
