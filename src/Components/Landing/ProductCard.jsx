@@ -4,8 +4,8 @@ import {Link} from "react-router-dom";
 function ProductCard({ product }) {
   return (
     <Link 
-    to={`/product/${product.id}`} // Pass path as a simple string
-      state={{ product }}
+      to={`/product/${product.id}`}
+      state={{ product }} //so that we can use it in Product Details
       className="block"
     >
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl hover:bg-gray-50">
