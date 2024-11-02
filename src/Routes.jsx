@@ -4,6 +4,7 @@ import Signup from "./Components/Auth/Signup";
 import { Routes, Route } from "react-router-dom";
 import Landing from "./Components/Landing/Landing";
 import ProductDetails from "./Components/ProductDetails";
+import Cart from "./Components/Cart/Cart";
 
 function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ function AppRoutes() {
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
       <Route path="/product/:id" element={<ProductDetails />} />
+      <Route path="/cart" element={<Cart />} />
     </Routes>
   );
 }
