@@ -1,7 +1,24 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/slices/cartSlice";
 import {Link} from "react-router-dom";
+import { formatPrice } from "../../utils/formatting"; 
 
 function ProductCard({ product }) {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (e) => {
+    e.preventDefault(); // Prevents navigation if wrapped in a Link
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: parseFloat(product.price.replace(/[^\d.-]/g, "")),// Parse price if it's a string with currency
+        image: product.image,
+      })
+    );
+  };
+  
   return (
     <Link 
       to={`/product/${product.id}`}
@@ -20,11 +37,11 @@ function ProductCard({ product }) {
         <div className="text-lg text-gray-700 mb-2">
           {product.oldPrice && (
             <span className="line-through text-gray-500 mr-2">
-              {product.oldPrice}
+            {formatPrice(product.oldPrice)}
             </span>
           )}
           <span className="text-green-500 font-semibold">
-            {product.price}
+          {formatPrice(product.price)}
           </span>
         </div>
         <p className="text-gray-600 mb-2">{product.description}</p>
@@ -61,10 +78,11 @@ function ProductCard({ product }) {
 
         <div className="flex flex-col gap-4">
         <button
-            className={`py-2 px-4 rounded-md transition duration-300 ${
+            onClick={handleAddToCart}
+            className={`py-2 px-4 transition duration-300 ${
               product.stock === 0
-                ? "bg-gray-200 text-black cursor-not-allowed"
-                : "bg-sky-900 text-white hover:bg-sky-800"
+                ? "bg-gray-200 text-black rounded-lg cursor-not-allowed"
+                : "bg-yellow-500 text-black rounded-3xl hover:bg-yellow-600"
             }`}
             disabled={product.stock === 0}
           >

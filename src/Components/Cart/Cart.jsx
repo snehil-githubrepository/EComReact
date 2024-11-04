@@ -1,22 +1,12 @@
 import React from "react";
+import { addToCart } from "../../redux/slices/cartSlice";
+import { removeFromCart } from "../../redux/slices/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { formatPrice } from "../../utils/formatting";
 
 function Cart() {
-  const cartItems = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: 2999,
-      quantity: 1,
-      image: "https://via.placeholder.com/100",
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      price: 3999,
-      quantity: 2,
-      image: "https://via.placeholder.com/100",
-    },
-  ];
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -45,11 +35,12 @@ function Cart() {
                 <div className="ml-6 flex-1">
                   <h2 className="font-semibold text-lg">{item.name}</h2>
                   <p className="text-gray-600 mt-1">
-                    Price: Rs.{item.price.toFixed(2)}
+                    <strong>Price: </strong>{formatPrice(item.price.toFixed(2))}
                   </p>
-                  <p className="text-gray-600">Quantity: {item.quantity}</p>
+                  <p className="text-gray-600"><strong>Quantity:</strong> {item.quantity}</p>
                 </div>
-                <button className="ml-auto text-red-500">Remove</button>
+                <button className="ml-auto text-red-500"
+                onClick={() => dispatch(removeFromCart({id : item.id}))}>Remove</button>
               </li>
             ))}
           </ul>
@@ -62,11 +53,7 @@ function Cart() {
 
         <div className="flex justify-between mb-4 text-lg">
           <span>Subtotal</span>
-          <span>Rs.{subtotal.toFixed(2)}</span>
-        </div>
-        <div className="flex justify-between mb-4 text-lg">
-          <span>Estimated Tax</span>
-          <span>Rs.122</span>
+          <span>Rs.{formatPrice(subtotal.toFixed(2))}</span>
         </div>
         <div className="flex justify-between mb-6 text-lg">
           <span>Delivery</span>
@@ -77,7 +64,7 @@ function Cart() {
 
         <div className="flex justify-between font-bold text-xl">
           <span>Total</span>
-          <span>{(subtotal + 2.5 + 5.0).toFixed(2)}</span>
+          <span>{formatPrice((subtotal+40).toFixed(2))}</span>
         </div>
 
         <button className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 mt-6 rounded-lg text-lg font-semibold">

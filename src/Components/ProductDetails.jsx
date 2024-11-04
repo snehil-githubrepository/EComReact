@@ -4,20 +4,29 @@ import RelatedProducts from "./ProductDetails/RelatedProducts";
 import QnA from "./ProductDetails/QnA";
 import CustomerReviews from "./ProductDetails/CustomerReviews";
 import Specifications from "./ProductDetails/Specifications";
+import { addToCart } from "../redux/slices/cartSlice";
+import { useDispatch } from "react-redux";
 
 function ProductDetails() {
   const location = useLocation();
   const { product } = location.state || {};
 
+  const dispatch = useDispatch();
+
   if (!product) {
     return <p>Product details not found.</p>;
   }
 
-  const oldPriceValue = product.oldPrice ? parseFloat(product.oldPrice.replace(/[^0-9.-]+/g, "")) : null;
-  const priceValue = product.price ? parseFloat(product.price.replace(/[^0-9.-]+/g, "")) : null;
-  const discountPercentage = oldPriceValue && priceValue
-    ? Math.round(((oldPriceValue - priceValue) / oldPriceValue) * 100)
+  const oldPriceValue = product.oldPrice
+    ? parseFloat(product.oldPrice.replace(/[^0-9.-]+/g, ""))
     : null;
+  const priceValue = product.price
+    ? parseFloat(product.price.replace(/[^0-9.-]+/g, ""))
+    : null;
+  const discountPercentage =
+    oldPriceValue && priceValue
+      ? Math.round(((oldPriceValue - priceValue) / oldPriceValue) * 100)
+      : null;
 
   return (
     <div className="container mx-auto p-6 bg-gray-100">
@@ -57,7 +66,9 @@ function ProductDetails() {
                 {product.oldPrice}
               </span>
             )}
-            <span className="text-green-500 font-semibold">{product.price}</span>
+            <span className="text-green-500 font-semibold">
+              {product.price}
+            </span>
             {discountPercentage && (
               <span className="text-red-500 font-semibold ml-4">
                 {discountPercentage}% OFF
@@ -68,18 +79,30 @@ function ProductDetails() {
 
           {/* Key Features */}
           <ul className="list-disc list-inside mb-6 text-gray-600">
-            <li>Feature 1: High-quality materials</li>
-            <li>Feature 2: Advanced performance</li>
-            <li>Feature 3: Durable and long-lasting</li>
-            {/* Add more key features as needed */}
+            <li>High-quality materials</li>
+            <li>Advanced performance</li>
+            <li>Durable and long-lasting</li>
           </ul>
 
           {/* Buttons */}
           <div className="flex gap-4 mt-6">
-            <button className="w-full py-2 px-4 bg-yellow-500 text-black font-bold rounded-md hover:bg-yellow-600">
+            <button
+              onClick={() =>
+                dispatch(
+                  addToCart({
+                    id: product.id,
+                    name: product.name,
+                    price: parseFloat(product.price.replace(/[^\d.-]/g, "")),
+                    image: product.image,
+                  })
+                )
+              }
+              className="w-full py-2 px-4 bg-yellow-500 text-black font-semibold rounded-3xl hover:bg-yellow-600"
+            >
               Add to Cart
             </button>
-            <button className="w-full py-2 px-4 bg-orange-500 text-white font-bold rounded-md hover:bg-orange-600">
+
+            <button className="w-full py-2 px-4 bg-orange-500 text-white font-semibold rounded-3xl hover:bg-orange-600">
               Buy Now
             </button>
           </div>

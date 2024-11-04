@@ -3,10 +3,13 @@ import Button from "./Common/Button";
 import SearchBox from "./Common/SearchBox";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 function NavBar() {
   const navigate = useNavigate();
-  const cartItemsCount = 2;
+  // const cartItemsCount = 2;
+
+  const cartItemsCount = useSelector((state) => state.cart.items.length);
 
   return (
     <div className="flex justify-between items-center w-full p-4 bg-sky-900 text-white font-bold cursor-pointer">
