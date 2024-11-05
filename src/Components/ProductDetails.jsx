@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useLocation } from "react-router-dom";
 import RelatedProducts from "./ProductDetails/RelatedProducts";
 import QnA from "./ProductDetails/QnA";
@@ -6,12 +6,14 @@ import CustomerReviews from "./ProductDetails/CustomerReviews";
 import Specifications from "./ProductDetails/Specifications";
 import { addToCart } from "../redux/slices/cartSlice";
 import { useDispatch } from "react-redux";
+import Toast from "./Common/Toast";
 
 function ProductDetails() {
   const location = useLocation();
   const { product } = location.state || {};
 
   const dispatch = useDispatch();
+  const [showToast, setShowToast] = useState(false);
 
   if (!product) {
     return <p>Product details not found.</p>;
@@ -27,6 +29,23 @@ function ProductDetails() {
     oldPriceValue && priceValue
       ? Math.round(((oldPriceValue - priceValue) / oldPriceValue) * 100)
       : null;
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: parseFloat(product.price.replace(/[^\d.-]/g, "")),
+        image: product.image,
+      })
+    );
+
+    setShowToast(true);
+
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
 
   return (
     <div className="container mx-auto p-6 bg-gray-100">
@@ -87,16 +106,7 @@ function ProductDetails() {
           {/* Buttons */}
           <div className="flex gap-4 mt-6">
             <button
-              onClick={() =>
-                dispatch(
-                  addToCart({
-                    id: product.id,
-                    name: product.name,
-                    price: parseFloat(product.price.replace(/[^\d.-]/g, "")),
-                    image: product.image,
-                  })
-                )
-              }
+              onClick={handleAddToCart}
               className="w-full py-2 px-4 bg-yellow-500 text-black font-semibold rounded-3xl hover:bg-yellow-600"
             >
               Add to Cart
@@ -115,6 +125,11 @@ function ProductDetails() {
       <CustomerReviews product={product} />
       <QnA />
       <RelatedProducts />
+
+      {/* Show toast if showToast is true */}
+      {showToast && (
+        <Toast message="Item added" onClose={() => setShowToast(false)} />
+      )}
     </div>
   );
 }
