@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 
 function TrendingNowBanner() {
   const images = [
-    "https://as2.ftcdn.net/v2/jpg/09/82/19/37/1000_F_982193797_n3i49v5T6Jb1HaxNcjd3TQmN5LFMNyUn.jpg",
-    "https://c4.wallpaperflare.com/wallpaper/308/395/819/religious-diwali-candle-hd-wallpaper-preview.jpg",
-    "https://t3.ftcdn.net/jpg/06/39/60/72/240_F_639607204_i7LgxE13yXzbPx1t4ygivMBIOlJFiYV7.jpghttps://t3.ftcdn.net/jpg/06/39/60/72/240_F_639607274_BUs4CKcdGmFLgU9FAch24sPbQ1zVfIdb.jpg",
+    "https://images.pexels.com/photos/1667088/pexels-photo-1667088.jpeg?cs=srgb&dl=pexels-laryssa-suaid-798122-1667088.jpg&fm=jpg",
+    "https://www.apple.com/newsroom/images/live-action/april-2021/apple_product-availability-spring21_iphone12-purple_geo_04292021_big_carousel.jpg.large.jpg",
+    "https://sony.scene7.com/is/image/sonyglobalsolutions/1000X_series_OOFM_banner_mobile_1454x884?$mediumstaticimagehotspot$",
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
