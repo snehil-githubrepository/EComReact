@@ -15,7 +15,7 @@ function NavBar() {
     <div className="flex justify-between items-center w-full p-4 bg-sky-900 text-white font-bold cursor-pointer">
       <div
         onClick={() => navigate("/")}
-        className="cursor-pointer text-3xl font-bold text-white hover:text-sky-100"
+        className="cursor-pointer text-3xl font-cursive font-bold text-white hover:text-sky-100"
       >
         EComReact
       </div>
@@ -47,12 +47,12 @@ function NavBar() {
         <Button
           label="Login"
           onClick={() => navigate("/login")}
-          className="bg-sky-500 hover:bg-sky-500 !text-black px-4 py-2 !font-serif rounded-lg !font-bold"
+          className="bg-sky-500 hover:bg-sky-500 !text-white px-4 py-2 !font-serif rounded-lg !font-bold"
         />
         <Button
           label="Register"
           onClick={() => navigate("/signup")}
-          className="bg-sky-500 hover:bg-sky-800 !text-black px-4 py-2 !font-serif rounded-lg !font-bold"
+          className="bg-sky-500 hover:bg-sky-800 !text-white px-4 py-2 !font-serif rounded-lg !font-bold"
         />
       </div>
     </div>
