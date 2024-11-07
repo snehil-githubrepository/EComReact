@@ -28,7 +28,7 @@ function SearchBox() {
       />
       <button
         onClick={handleSearch}
-        className="flex items-center justify-center bg-blue-900 hover:bg-blue-700 text-white p-2.5 rounded-full transition duration-150 ml-2"
+        className="flex items-center justify-center bg-gray-700 hover:bg-blue-700 text-white p-2.5 rounded-full transition duration-150 ml-2"
       >
         <MdOutlineSearch className="text-xl" />
       </button>
