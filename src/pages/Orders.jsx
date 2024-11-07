@@ -1,5 +1,5 @@
 import React from "react";
-import { orders } from "../data/OrdersData";
+import ordersData from "../data/orders.json";
 
 function Orders() {
   return (
@@ -9,7 +9,7 @@ function Orders() {
       </h1>
 
       <div className="space-y-8">
-        {orders.map((order) => (
+        {ordersData.orders.map((order) => (
           <div
             key={order.id}
             className="rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
