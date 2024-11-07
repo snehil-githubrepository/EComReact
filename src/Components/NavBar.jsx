@@ -2,13 +2,13 @@ import React from "react";
 import Button from "./Common/Button";
 import SearchBox from "./Common/SearchBox";
 import { NavLink, useNavigate } from "react-router-dom";
+import { LuPackage } from "react-icons/lu";
 import { FaShoppingCart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 function NavBar() {
   const navigate = useNavigate();
-  // const cartItemsCount = 2;
-
+  
   const cartItemsCount = useSelector((state) => state.cart.items.length);
 
   return (
@@ -34,14 +34,25 @@ function NavBar() {
           )}
         </NavLink>
         <Button
+          label={
+            <div className="flex items-center">
+              <LuPackage className="mr-2 text-white" />
+              Your Orders
+            </div>
+          }
+          onClick={() => navigate("/orders")}
+          className="!bg-emerald-600 hover:!bg-emerald-700 text-white px-4 py-2 !rounded-full"
+        />
+
+        <Button
           label="Login"
           onClick={() => navigate("/login")}
-          className="bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-lg"
+          className="bg-sky-500 hover:bg-sky-500 !text-black px-4 py-2 !font-serif rounded-lg !font-bold"
         />
         <Button
           label="Register"
           onClick={() => navigate("/signup")}
-          className="bg-white text-sky-800 hover:bg-sky-100 px-4 py-2 rounded-lg font-bold"
+          className="bg-sky-500 hover:bg-sky-800 !text-black px-4 py-2 !font-serif rounded-lg !font-bold"
         />
       </div>
     </div>
