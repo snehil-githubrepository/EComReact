@@ -1,5 +1,5 @@
 import React from "react";
-import { formatPrice } from "../utils/formatting";
+import { formatPrice } from "../utils/formatting"
 import { useSelector, useDispatch } from "react-redux";
 import {
   incrementQuantity,
