@@ -1,6 +1,12 @@
 import React from "react";
 
-function Button({ label, onClick, className = "" }) {
+interface ButtonProps {
+  label : string;
+  onClick: () => void;
+  className?: string; 
+}
+
+const Button: React.FC<ButtonProps> = ({ label, onClick, className = "" }) => {
   return (
     <div className="flex justify-center">
       <button
